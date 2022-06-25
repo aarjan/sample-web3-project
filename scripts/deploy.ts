@@ -11,8 +11,8 @@ async function main() {
 
   console.log('Account balance:', await deployer.getBalance());
 
-  const Token = await ethers.getContractFactory('Token');
-  const token = await Token.deploy('Aarjan Token', 'ATK', 18, 100);
+  const Token = await ethers.getContractFactory('Token', deployer);
+  const token = await Token.deploy('Aarjan New Token', 'ANTK', 18, 1000);
   await token.deployed();
 
   console.log('Token address', token.address);
